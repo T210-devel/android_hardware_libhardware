@@ -102,6 +102,13 @@ typedef struct hwc_layer {
 
             /* blending to apply during composition */
             int32_t blending;
+            
+#ifdef MRVL_HARDWARE
+            /* for HWC_BLENDING_NONE, alpha is not used.
+			 * for HWC_BLENDING_PREMULT and HWC_BLENDING_COVERAGE, it is plane alpha value.
+			 * for HWC_BLENDING_DIM, it is the alpha in source color (0,0,0,alpha). */
+            int32_t alpha;
+#endif
 
             /* area of the source to consider, the origin is the top-left corner of
              * the buffer */
@@ -270,3 +277,4 @@ static inline int hwc_close(hwc_composer_device_t* device) {
 /*****************************************************************************/
 
 #endif /* ANDROID_INCLUDE_HARDWARE_HWCOMPOSER_V0_H */
+
